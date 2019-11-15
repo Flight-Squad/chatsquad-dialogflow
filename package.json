@@ -1,0 +1,14 @@
+{
+  "name": "chatsquad",
+  "version": "1.0.0",
+  "description": "Chat server for dialogflow",
+  "main": "index.js",
+  "author": "Pujit Mehrotra",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "dialogflow": "^0.14.1",
+    "dotenv": "^8.2.0",
+    "uuid": "^3.3.3"
+  }
+}
