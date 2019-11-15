@@ -10,13 +10,17 @@
     "start": "node -r esm src/index.js"
   },
   "dependencies": {
+    "@google-cloud/storage": "^4.1.2",
     "dialogflow": "^0.14.1",
     "dotenv": "^8.2.0",
     "esm": "^3.2.25",
+    "express": "^4.17.1",
     "module-alias": "^2.2.2",
+    "path": "^0.12.7",
     "uuid": "^3.3.3"
   },
   "_moduleAliases": {
-    "config": "src/config"
+    "config": "src/config",
+    "api": "src/api"
   }
 }
