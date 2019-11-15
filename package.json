@@ -15,6 +15,7 @@
     "dotenv": "^8.2.0",
     "esm": "^3.2.25",
     "express": "^4.17.1",
+    "heroku-logger": "^0.3.3",
     "module-alias": "^2.2.2",
     "path": "^0.12.7",
     "uuid": "^3.3.3"
