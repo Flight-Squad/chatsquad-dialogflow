@@ -14,8 +14,8 @@ app.post('/hook', async function (req, res) {
   logger.info('Request Query', req.query);
   logger.info('Request Params', req.params);
   logger.info('Request Headers', req.headers);
-  console.log(req);
-  const agent = new WebhookClient({req, res});
+  // console.log(req);
+  const agent = new WebhookClient({request: req, response: res});
   agent.add('Aight, we on it.');
   res.sendStatus(201);
 });
