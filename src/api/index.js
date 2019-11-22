@@ -9,8 +9,9 @@ app.use(express.json())
 
 app.get('/', (req, res) => res.send('Hello World!'))
 
-app.post('/hook', (req, res) => {
+app.post('/hook', async function (req, res) {
   logger.info('Request Body', req.body);
+  logger.info('Request Query', req.query);
   logger.info('Request Params', req.params);
   logger.info('Request Headers', req.headers);
   const agent = new WebhookClient({req, res});
