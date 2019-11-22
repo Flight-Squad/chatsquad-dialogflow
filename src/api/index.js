@@ -59,8 +59,8 @@ app.post('/sendPrices', (req, res) => {
         event: {
           name: 'displayFlight',
           parameters: data,
+          languageCode: "en-US",
         },
-        languageCode: "en-US",
       },
     }
   );
