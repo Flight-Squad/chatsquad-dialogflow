@@ -20,7 +20,7 @@ app.post('/hook', async function (req, res) {
   // logger.info('Request Headers', req.headers);
   const agent = new WebhookClient({request: req, response: res});
   const sesssionId = await parseSessionId(agent.session);
-  logger.info(`Session ${JSON.stringify(agent.session)}`);
+  // logger.info(`Session ${JSON.stringify(agent.session)}`);
 
   let intentMap = new Map();
   intentMap.set('flight.book', async () => {
