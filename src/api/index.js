@@ -16,8 +16,18 @@ app.post('/hook', async function (req, res) {
   logger.info('Request Headers', req.headers);
   // console.log(req);
   const agent = new WebhookClient({request: req, response: res});
-  agent.add('Aight, we on it.');
-  res.sendStatus(201);
+
+  function weOnIt () {
+    agent.add('Aight, we on it.');
+  }
+
+  let intentMap = new Map();
+  intentMap.set('flight.book', weOnIt);
+  // intentMap.set('Default Fallback Intent', fallback);
+  // intentMap.set('your intent name here', yourFunctionHandler);
+  // intentMap.set('your intent name here', googleAssistantHandler);
+  agent.handleRequest(intentMap);
+  // res.sendStatus(201);
 });
 
 app.listen(port, () => logger.info(`Listening on port ${port}!`))
