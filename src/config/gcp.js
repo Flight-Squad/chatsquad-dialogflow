@@ -3,7 +3,7 @@ import path from 'path';
 import logger from './logger';
 const fs = require('fs');
 
-const projectId = process.env.GCP_PROJECT_ID;
+export const projectId = process.env.GCP_PROJECT_ID;
 
 const creds = process.env.GCP_CREDS;
 
