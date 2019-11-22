@@ -19,6 +19,7 @@ app.post('/hook', async function (req, res) {
 
   function weOnIt () {
     agent.add('Aight, we on it.');
+    setTimeout(() => agent.add("Here's some shiz"), 7000);
   }
 
   let intentMap = new Map();
