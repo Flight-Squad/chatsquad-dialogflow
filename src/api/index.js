@@ -18,9 +18,11 @@ app.post('/hook', async function (req, res) {
   // logger.info('Request Params', req.params);
   // logger.info('Request Headers', req.headers);
   const agent = new WebhookClient({request: req, response: res});
+  logger.info(`Session ${JSON.stringify(agent.session)}`);
 
   let intentMap = new Map();
   intentMap.set('flight.book', () => agent.add('Aight, we on it.'));
+  intentMap.set('flight.show', () => agent.add('Will show prices'));
   // intentMap.set('Default Fallback Intent', fallback);
   // intentMap.set('your intent name here', yourFunctionHandler);
   // intentMap.set('your intent name here', googleAssistantHandler);
@@ -37,7 +39,12 @@ app.post('/sendPrices', (req, res) => {
       // Trigger a response event
       // https://googleapis.dev/nodejs/dialogflow/latest/google.cloud.dialogflow.v2beta1.html#.QueryInput
       // https://cloud.google.com/dialogflow/docs/events-custom
-      queryInput: {},
+      queryInput: {
+        event: {
+          name: 'displayFlight',
+          parameters: data,
+        },
+      },
     }
   );
   res.sendStatus(201);
