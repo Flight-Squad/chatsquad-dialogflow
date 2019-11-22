@@ -1,7 +1,7 @@
 import express from 'express'
 import logger from 'config/logger'
 import { WebhookClient } from 'dialogflow-fulfillment';
-import * as FlightIntent from './flight';
+import * as FlightIntent from '../../intents/flight';
 
 const hookRouter = express.Router();
 

@@ -24,6 +24,8 @@
   },
   "_moduleAliases": {
     "config": "src/config",
-    "api": "src/api"
+    "api": "src/api",
+    "actions": "src/actions",
+    "intents": "src/intents"
   }
 }
