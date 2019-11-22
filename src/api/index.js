@@ -17,9 +17,9 @@ app.post('/hook', async function (req, res) {
   // console.log(req);
   const agent = new WebhookClient({request: req, response: res});
 
-  function weOnIt () {
+  async function weOnIt () {
+    await sleep(5000);
     agent.add('Aight, we on it.');
-    setTimeout(() => agent.add("Here's some shiz"), 7000);
   }
 
   let intentMap = new Map();
@@ -30,5 +30,11 @@ app.post('/hook', async function (req, res) {
   agent.handleRequest(intentMap);
   // res.sendStatus(201);
 });
+
+function sleep(ms){
+  return new Promise(resolve=>{
+      setTimeout(resolve,ms)
+  })
+}
 
 app.listen(port, () => logger.info(`Listening on port ${port}!`))
