@@ -16,13 +16,13 @@ app.get('/', (req, res) => res.send('Hello World!'))
 
 app.post('/hook', async function (req, res) {
   // Include all of these in a canonical line later
-  logger.info('Request Body', req.body);
   // logger.info('Request Query', req.query);
   // logger.info('Request Params', req.params);
   // logger.info('Request Headers', req.headers);
   const agent = new WebhookClient({request: req, response: res});
   const sesssionId = await parseSessionId(agent.session);
   // logger.info(`Session ${JSON.stringify(agent.session)}`);
+  logger.info('Intent Parameters', agent.parameters);
 
   let intentMap = new Map();
   intentMap.set('flight.search', async () => {
