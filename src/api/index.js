@@ -8,6 +8,8 @@ import Axios from 'axios';
 const app = express()
 const port = process.env.PORT || 3000
 
+process.env.DEBUG = 'dialogflow:debug'; // enables lib debugging statements
+
 app.use(express.json())
 
 app.get('/', (req, res) => res.send('Hello World!'))
@@ -23,7 +25,7 @@ app.post('/hook', async function (req, res) {
   // logger.info(`Session ${JSON.stringify(agent.session)}`);
 
   let intentMap = new Map();
-  intentMap.set('flight.book', async () => {
+  intentMap.set('flight.search', async () => {
     agent.add('Aight, we on it.');
     Axios.post('https://chatsquad-webhook.herokuapp.com/sendPrices', {
       sessionId: agent.session,
