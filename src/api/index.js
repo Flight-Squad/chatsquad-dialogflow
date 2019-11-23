@@ -16,7 +16,7 @@ app.get('/', (req, res) => res.send('Hello World!'))
 
 app.post('/hook', async function (req, res) {
   // Include all of these in a canonical line later
-  // logger.info('Request Body', req.body);
+  logger.info('Request Body', req.body);
   // logger.info('Request Query', req.query);
   // logger.info('Request Params', req.params);
   // logger.info('Request Headers', req.headers);
