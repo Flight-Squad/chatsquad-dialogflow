@@ -2,12 +2,12 @@
   "name": "chatsquad",
   "version": "1.0.0",
   "description": "Chat server for dialogflow",
-  "main": "src/index.js",
+  "main": "bin/index.js",
   "author": "Pujit Mehrotra",
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "node -r esm src/index.js"
+    "start": "tsc && node -r esm bin/index.js"
   },
   "dependencies": {
     "@google-cloud/storage": "^4.1.2",
@@ -21,12 +21,14 @@
     "heroku-logger": "^0.3.3",
     "module-alias": "^2.2.2",
     "path": "^0.12.7",
+    "typescript": "^3.7.2",
     "uuid": "^3.3.3"
   },
   "_moduleAliases": {
-    "config": "src/config",
-    "api": "src/api",
-    "actions": "src/actions",
-    "intents": "src/intents"
+    "config": "bin/config",
+    "api": "bin/api",
+    "actions": "bin/actions",
+    "intents": "bin/intents",
+    "modules": "bin/modules"
   }
 }
