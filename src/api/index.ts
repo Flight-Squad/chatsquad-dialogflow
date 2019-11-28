@@ -44,8 +44,8 @@ async function parseSessionId(sessionPath) {
 
 app.post('/sendPrices', (req, res) => {
   const {sessionId, ...data} = req.body;
-  const arr = data.data;
-  logger.info('SendPrices::Data', arr);
+  console.log(data);
+  // logger.info('SendPrices::Data', arr);
   // logger.info('SendPrices::DataKeys', Object.keys(data));
   sessionClient.detectIntent(
     {
@@ -59,7 +59,7 @@ app.post('/sendPrices', (req, res) => {
         event: {
           name: 'displayFlight',
           parameters: {
-            data: arr,
+            data: data,
           },
           languageCode: "en-US",
         },
