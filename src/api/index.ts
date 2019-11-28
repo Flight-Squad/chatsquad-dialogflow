@@ -44,7 +44,8 @@ async function parseSessionId(sessionPath) {
 
 app.post('/sendPrices', (req, res) => {
   const {sessionId, ...data} = req.body;
-  logger.info('SendPrices::DataKeys', Object.keys(data));
+  logger.info('SendPrices::Data', data);
+  // logger.info('SendPrices::DataKeys', Object.keys(data));
   sessionClient.detectIntent(
     {
       // session: `projects/${projectId}/agent/sessions/${sessionId}`,
@@ -70,7 +71,7 @@ app.listen(port, () => logger.info(`Listening on port ${port}!`))
 async function dummyWork(agent) {
   const pricesquadReq = await Axios.get('https://pricesquad-dev-0.herokuapp.com/prices/001203ff-4057-4c59-af1d-0150aaaa92c2');
   const priceData = pricesquadReq.data.res;
-  logger.info('Pricesquad Data', priceData);
+  // logger.info('Pricesquad Data', priceData);
   Axios.post('https://chatsquad-webhook.herokuapp.com/sendPrices', {
       sessionId: agent.session,
       data: priceData,
