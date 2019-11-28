@@ -29,7 +29,7 @@ app.post('/hook', async function (req, res) {
     agent.add('Aight, we on it.');
     dummyWork(agent);
   });
-  intentMap.set('flight.show', () => agent.add(`Parameters: ${JSON.stringify(agent.parameters)}`));
+  intentMap.set('flight.show', () => agent.add(`Parameters: ${JSON.stringify(agent.originalRequest)}`));
   // intentMap.set('Default Fallback Intent', fallback);
   // intentMap.set('your intent name here', yourFunctionHandler);
   // intentMap.set('your intent name here', googleAssistantHandler);
