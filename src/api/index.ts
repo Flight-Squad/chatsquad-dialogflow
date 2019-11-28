@@ -59,7 +59,7 @@ app.post('/sendPrices', (req, res) => {
         event: {
           name: 'displayFlight',
           parameters: {
-            data: data.google.url,
+            data: JSON.stringify(data),
           },
           languageCode: "en-US",
         },
@@ -73,7 +73,7 @@ app.listen(port, () => logger.info(`Listening on port ${port}!`))
 
 async function dummyWork(agent) {
   const pricesquadReq = await Axios.get('https://pricesquad-dev-0.herokuapp.com/prices/001203ff-4057-4c59-af1d-0150aaaa92c2');
-  const priceData = pricesquadReq.data.res.data;
+  const priceData = pricesquadReq.data.res;
   // logger.info('Pricesquad Data', priceData);
   Axios.post('https://chatsquad-webhook.herokuapp.com/sendPrices', {
       sessionId: agent.session,
