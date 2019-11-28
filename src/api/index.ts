@@ -27,14 +27,9 @@ app.post('/hook', async function (req, res) {
   let intentMap = new Map();
   intentMap.set('flight.search', async () => {
     agent.add('Aight, we on it.');
-    Axios.post('https://chatsquad-webhook.herokuapp.com/sendPrices', {
-      sessionId: agent.session,
-      data: {
-        yolo: 'hi',
-      },
-    })
+    dummyWork(agent);
   });
-  intentMap.set('flight.show', () => agent.add('Will show prices'));
+  intentMap.set('flight.show', () => agent.add(`Parameters: ${JSON.stringify(agent.parameters)}`));
   // intentMap.set('Default Fallback Intent', fallback);
   // intentMap.set('your intent name here', yourFunctionHandler);
   // intentMap.set('your intent name here', googleAssistantHandler);
@@ -70,3 +65,12 @@ app.post('/sendPrices', (req, res) => {
 })
 
 app.listen(port, () => logger.info(`Listening on port ${port}!`))
+
+async function dummyWork(agent) {
+  const pricesquadReq = await Axios.get('https://pricesquad-dev-0.herokuapp.com/prices/001203ff-4057-4c59-af1d-0150aaaa92c2');
+  const priceData = pricesquadReq.data.res;
+  Axios.post('https://chatsquad-webhook.herokuapp.com/sendPrices', {
+      sessionId: agent.session,
+      data: priceData,
+    });
+}
