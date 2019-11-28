@@ -44,6 +44,7 @@ async function parseSessionId(sessionPath) {
 
 app.post('/sendPrices', (req, res) => {
   const {sessionId, ...data} = req.body;
+  logger.info('SendPrices::DataKeys', Object.keys(data));
   sessionClient.detectIntent(
     {
       // session: `projects/${projectId}/agent/sessions/${sessionId}`,
