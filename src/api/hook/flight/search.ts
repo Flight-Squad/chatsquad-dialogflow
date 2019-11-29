@@ -10,7 +10,7 @@ import Axios from 'axios';
  */
 export async function onFlightSearch(agent) {
   sendPriceRequest(agent);
-  agent.setContext({ reqId: 'dummy', name: 'flight' });
+  agent.setContext({ reqId: 'dummy', name: 'requestId' });
   agent.add('Aight, we on it.');
 }
 
