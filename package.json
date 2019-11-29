@@ -29,6 +29,7 @@
     "api": "bin/api",
     "actions": "bin/actions",
     "intents": "bin/intents",
-    "modules": "bin/modules"
+    "modules": "bin/modules",
+    "data": "bin/data"
   }
 }
