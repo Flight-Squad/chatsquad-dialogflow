@@ -20,8 +20,8 @@ app.post('/sendPrices', (req, res) => {
   const {sessionId, ...data} = req.body;
   sessionClient.detectIntent(
     {
-      // session: `projects/${projectId}/agent/sessions/${sessionId}`,
-      session: sessionId,
+      session: `projects/${projectId}/agent/sessions/${sessionId}`,
+      // session: sessionId,
 
       // Trigger a response event
       // https://googleapis.dev/nodejs/dialogflow/latest/google.cloud.dialogflow.v2beta1.html#.QueryInput
