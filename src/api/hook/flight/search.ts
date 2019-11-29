@@ -13,7 +13,7 @@ import { parseSessionId } from 'actions/parse/session/id';
  * @param agent type `WebhookClient`
  */
 export async function onFlightSearch(agent) {
-  const requestId = sendPriceRequest(agent.session, agent.parameters);
+  const requestId = await sendPriceRequest(agent.session, agent.parameters);
   agent.context.set({ name: 'request-id', lifespan: 20, parameters: { id: requestId } });
   agent.add('Aight, we on it.');
 }

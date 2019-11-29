@@ -13,10 +13,10 @@ hookRouter.post('/hook', async (request, response) => {
   // logger.info('Request Params', req.params);
   // logger.info('Request Headers', req.headers);
   const agent = new WebhookClient({request, response});
-  logger.info('Agent Contexts', agent.contexts);
-  console.log(agent.context.get('request-id'));
+  // logger.info('Agent Contexts', agent.contexts);
+  // console.log(agent.context.get('request-id'));
   // logger.info(`Session ${JSON.stringify(agent.session)}`);
-  logger.info('Intent Parameters', agent.parameters);
+  // logger.info('Intent Parameters', agent.parameters);
 
   let intentMap = new Map();
   intentMap.set('flight.search', async () => await onFlightSearch(agent));
