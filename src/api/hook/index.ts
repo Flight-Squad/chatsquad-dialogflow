@@ -14,8 +14,7 @@ hookRouter.post('/hook', async (request, response) => {
   // logger.info('Request Headers', req.headers);
   const agent = new WebhookClient({request, response});
   logger.info('Agent Contexts', agent.contexts);
-  logger.info('Request ID Context', agent.context.get('requestId'));
-  const sesssionId = await parseSessionId(agent.session);
+  logger.info('Request ID Context', agent.context.get('request-id'));
   // logger.info(`Session ${JSON.stringify(agent.session)}`);
   logger.info('Intent Parameters', agent.parameters);
 
@@ -27,11 +26,6 @@ hookRouter.post('/hook', async (request, response) => {
   // intentMap.set('your intent name here', googleAssistantHandler);
   agent.handleRequest(intentMap);
   // res.sendStatus(201);
-})
-
-async function parseSessionId(sessionPath) {
-  const parts = sessionPath.split('/');
-  return parts[parts.length - 1];
-}
+});
 
 export default hookRouter;

@@ -1,5 +1,7 @@
 import { WebhookClient } from 'dialogflow-fulfillment';
 import Axios from 'axios';
+import uuidv4 from 'uuid/v4';
+import { makeFlightSearchParams } from 'data/models/flight/search/params';
 
 /**
  * Action taken on flight.search intent
@@ -9,14 +11,26 @@ import Axios from 'axios';
  * @param agent type `WebhookClient`
  */
 export async function onFlightSearch(agent) {
-  sendPriceRequest(agent);
-  agent.setContext({ name: 'requestId', lifespan: 20, parameters: { id: 'dummy' } });
+  const requestId = sendPriceRequest(agent.session, agent.parameters);
+  agent.setContext({ name: 'request-id', lifespan: 20, parameters: { id: requestId } });
   agent.add('Aight, we on it.');
 }
 
-async function sendPriceRequest(agent) {
-  Axios.post('https://chatsquad-webhook.herokuapp.com/sendPrices', {
-    sessionId: agent.session,
-    data: { yolo: 'hi' },
+async function sendPriceRequest(sessionPath, params) {
+  const baseUri = process.env.PRICESQUAD_API;
+  const flightParams = await makeFlightSearchParams(params);
+  const res = await Axios.post(`${baseUri}/prices`, {
+    sessionId: await parseSessionId(sessionPath),
+    ...flightParams,
   });
+  return res.data.id;
+  // Axios.post('https://chatsquad-webhook.herokuapp.com/sendPrices', {
+  //   sessionId: agent.session,
+  //   data: { yolo: 'hi' },
+  // });
+}
+
+async function parseSessionId(sessionPath) {
+  const parts = sessionPath.split('/');
+  return parts[parts.length - 1];
 }
