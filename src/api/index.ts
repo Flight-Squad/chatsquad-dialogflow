@@ -26,6 +26,7 @@ app.post('/hook', async function (req, res) {
 
   let intentMap = new Map();
   intentMap.set('flight.search', async () => {
+    dummyWork(agent);
     agent.add('Aight, we on it.');
   });
   intentMap.set('flight.show', async () => await flightShow(agent));
@@ -66,6 +67,13 @@ app.post('/sendPrices', (req, res) => {
 })
 
 app.listen(port, () => logger.info(`Listening on port ${port}!`))
+
+async function dummyWork(agent) {
+  Axios.post('https://chatsquad-webhook.herokuapp.com/sendPrices', {
+      sessionId: agent.session,
+      data: {yolo: 'hi'},
+    });
+}
 
 async function flightShow(agent) {
   // retrieve data based on session id
