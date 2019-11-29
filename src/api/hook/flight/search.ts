@@ -2,6 +2,7 @@ import { WebhookClient } from 'dialogflow-fulfillment';
 import Axios from 'axios';
 import uuidv4 from 'uuid/v4';
 import { makeFlightSearchParams } from 'data/models/flight/search/params';
+import logger from 'config/logger';
 
 /**
  * Action taken on flight.search intent
@@ -23,6 +24,7 @@ async function sendPriceRequest(sessionPath, params) {
     sessionId: await parseSessionId(sessionPath),
     ...flightParams,
   });
+  logger.debug('Price Request Response Data', res.data);
   return res.data.id;
   // Axios.post('https://chatsquad-webhook.herokuapp.com/sendPrices', {
   //   sessionId: agent.session,
