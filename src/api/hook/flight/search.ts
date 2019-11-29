@@ -12,7 +12,7 @@ import { makeFlightSearchParams } from 'data/models/flight/search/params';
  */
 export async function onFlightSearch(agent) {
   const requestId = sendPriceRequest(agent.session, agent.parameters);
-  agent.setContext({ name: 'requestid', lifespan: 20, parameters: { id: requestId } });
+  agent.context.set({ name: 'request-id', lifespan: 20, parameters: { id: requestId } });
   agent.add('Aight, we on it.');
 }
 
