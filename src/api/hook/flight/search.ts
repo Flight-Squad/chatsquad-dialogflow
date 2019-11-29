@@ -3,6 +3,7 @@ import Axios from 'axios';
 import uuidv4 from 'uuid/v4';
 import { makeFlightSearchParams } from 'data/models/flight/search/params';
 import logger from 'config/logger';
+import { parseSessionId } from 'actions/parse/session/id';
 
 /**
  * Action taken on flight.search intent
@@ -30,9 +31,4 @@ async function sendPriceRequest(sessionPath, params) {
   //   sessionId: agent.session,
   //   data: { yolo: 'hi' },
   // });
-}
-
-async function parseSessionId(sessionPath) {
-  const parts = sessionPath.split('/');
-  return parts[parts.length - 1];
 }
