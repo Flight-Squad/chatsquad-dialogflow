@@ -14,6 +14,7 @@ hookRouter.post('/hook', async (request, response) => {
   // logger.info('Request Headers', req.headers);
   const agent = new WebhookClient({request, response});
   logger.info('Agent Contexts', agent.contexts);
+  logger.info('Request ID Context', agent.context.get('requestId'));
   const sesssionId = await parseSessionId(agent.session);
   // logger.info(`Session ${JSON.stringify(agent.session)}`);
   logger.info('Intent Parameters', agent.parameters);
