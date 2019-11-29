@@ -27,7 +27,6 @@ app.post('/hook', async function (req, res) {
   let intentMap = new Map();
   intentMap.set('flight.search', async () => {
     agent.add('Aight, we on it.');
-    dummyWork(agent);
   });
   intentMap.set('flight.show', async () => await flightShow(agent));
   // intentMap.set('Default Fallback Intent', fallback);
@@ -44,7 +43,6 @@ async function parseSessionId(sessionPath) {
 
 app.post('/sendPrices', (req, res) => {
   const {sessionId, ...data} = req.body;
-  console.log(data);
   // logger.info('SendPrices::Data', arr);
   // logger.info('SendPrices::DataKeys', Object.keys(data));
   sessionClient.detectIntent(
@@ -58,9 +56,7 @@ app.post('/sendPrices', (req, res) => {
       queryInput: {
         event: {
           name: 'displayFlight',
-          parameters: {
-            data: JSON.stringify(data),
-          },
+          parameters: data,
           languageCode: "en-US",
         },
       },
@@ -71,19 +67,10 @@ app.post('/sendPrices', (req, res) => {
 
 app.listen(port, () => logger.info(`Listening on port ${port}!`))
 
-async function dummyWork(agent) {
-  const pricesquadReq = await Axios.get('https://pricesquad-dev-0.herokuapp.com/prices/001203ff-4057-4c59-af1d-0150aaaa92c2');
-  const priceData = pricesquadReq.data.res;
-  // logger.info('Pricesquad Data', priceData);
-  Axios.post('https://chatsquad-webhook.herokuapp.com/sendPrices', {
-      sessionId: agent.session,
-      data: priceData,
-    });
-}
-
 async function flightShow(agent) {
   // retrieve data based on session id
   const pricesquadReq = await Axios.get('https://pricesquad-dev-0.herokuapp.com/prices/001203ff-4057-4c59-af1d-0150aaaa92c2');
   const priceData = pricesquadReq.data.res;
-  agent.add(`Parameters: ${JSON.stringify(priceData)}`);
+  const bestGPrices = priceData.google.data.map(quote => quote.price).sort();
+  agent.add(`Parameters: ${JSON.stringify(bestGPrices)}`);
 }
