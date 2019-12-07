@@ -1,3 +1,6 @@
+import openflightsArray from "openflights-cached/array";
+import { mapFsAirportToIataList } from "data/airport/mappings";
+
 /**
  * Slave copy of
  * Flight-Squad/pricesquad/src/data/models/flightSearchParams.ts
@@ -28,7 +31,7 @@ export enum FlightStops {
  */
 export function makeFlightSearchParams(data: any): IFlightSearchParams {
   // departure: string || { startDate: string, endDate: string };
-  const {from, to, departure} = data;
+  const { from, to, departure } = data;
   const params: any = {
     origin: from,
     dest: to,
@@ -44,4 +47,18 @@ export function makeFlightSearchParams(data: any): IFlightSearchParams {
   }
 
   return params;
+}
+
+export async function makeBatchFlightParams(params: IFlightSearchParams) {
+  const { isRoundTrip, numStops } = params;
+  const batchParams: any = {
+    origins: await mapFsAirportToIataList(params.origin),
+    destinations: await mapFsAirportToIataList(params.dest),
+    departDates: [params.departDate],
+    isRoundTrip,
+    numStops,
+  }
+  batchParams.returnDates = isRoundTrip ? [params.returnDate] : [];
+
+  return batchParams;
 }

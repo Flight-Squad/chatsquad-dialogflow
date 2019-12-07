@@ -1,7 +1,7 @@
 import { WebhookClient } from 'dialogflow-fulfillment';
 import Axios from 'axios';
 import uuidv4 from 'uuid/v4';
-import { makeFlightSearchParams } from 'data/models/flight/search/params';
+import { makeFlightSearchParams, IFlightSearchParams, makeBatchFlightParams } from 'data/models/flight/search/params';
 import logger from 'config/logger';
 import { parseSessionId } from 'actions/parse/session/id';
 
@@ -13,17 +13,19 @@ import { parseSessionId } from 'actions/parse/session/id';
  * @param agent type `WebhookClient`
  */
 export async function onFlightSearch(agent) {
-  const requestId = await sendPriceRequest(agent.session, agent.parameters);
-  agent.context.set({ name: 'request-id', lifespan: 20, parameters: { id: requestId } });
+  const docPath = await sendPriceRequest(agent.session, agent.parameters);
+  // use `id` instead of path to abstract the actual resource that identifies the db entry
+  agent.context.set({ name: 'doc-path', lifespan: 20, parameters: { id: docPath } });
   agent.add('Aight, we on it.');
 }
 
 async function sendPriceRequest(sessionPath, params) {
   const baseUri = process.env.PRICESQUAD_API;
   const flightParams = await makeFlightSearchParams(params);
-  const res = await Axios.post(`${baseUri}/prices`, {
+  const batchFlightParams = await makeBatchFlightParams(flightParams);
+  const res = await Axios.post(`${baseUri}/prices/batch`, {
     sessionId: await parseSessionId(sessionPath),
-    ...flightParams,
+    ...batchFlightParams,
   });
   logger.debug('Price Request Response Data', res.data);
   return res.data.id;

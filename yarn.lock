@@ -1146,6 +1146,13 @@ onetime@^5.1.0:
   dependencies:
     mimic-fn "^2.1.0"
 
+openflights-cached@^1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/openflights-cached/-/openflights-cached-1.1.6.tgz#22a30b47a76a5c9f5f2718dbdcad5258ee8a288f"
+  integrity sha512-47SzVcsSx6OXCi0QVhORpnf7YrueWy6wDMELdGyXNAp5uc9CtzC9/jzDWWBWpKbTsLq8K/5B0q9gAXJsWxHb3A==
+  dependencies:
+    scramjet "^4.27.2"
+
 p-limit@^2.2.0:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/p-limit/-/p-limit-2.2.1.tgz#aa07a788cc3151c939b5131f63570f0dd2009537"
@@ -1157,6 +1164,11 @@ p-try@^2.0.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/p-try/-/p-try-2.2.0.tgz#cb2868540e313d61de58fafbe35ce9004d5540e6"
   integrity sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ==
+
+papaparse@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/papaparse/-/papaparse-5.1.0.tgz#6228e8d96de99630ad017cf6522042319facc5eb"
+  integrity sha512-3jEYMiCc8qN7V5ffi2BTS2mRauKxCu5AIED6DxbjnHhIm7OY7fzKYkndfPlHWaaKUDCTml5XTU6V+hiuxGlZuw==
 
 parseurl@~1.3.3:
   version "1.3.3"
@@ -1287,6 +1299,11 @@ readable-stream@^2.0.0, readable-stream@~2.3.6:
     string_decoder "~1.1.1"
     util-deprecate "~1.0.1"
 
+rereadable-stream@^1.3.13:
+  version "1.3.14"
+  resolved "https://registry.yarnpkg.com/rereadable-stream/-/rereadable-stream-1.3.14.tgz#24c27197ab489622c15e9134e9644cbc333d26e4"
+  integrity sha512-/70f0M+lyP4fldhm/jsSmDd3LeNY92T5/e5fsetP4fwp/Y+NDAlJI5ybs1SWTZv5z4GyZs+dSTA1uG0CmgZG8g==
+
 retry-axios@0.3.2, retry-axios@^0.3.2:
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/retry-axios/-/retry-axios-0.3.2.tgz#5757c80f585b4cc4c4986aa2ffd47a60c6d35e13"
@@ -1314,6 +1331,20 @@ safe-buffer@^5.0.1, safe-buffer@~5.2.0:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
+
+scramjet-core@^4.23.5:
+  version "4.23.5"
+  resolved "https://registry.yarnpkg.com/scramjet-core/-/scramjet-core-4.23.5.tgz#4635b878e89faa43cc51e795645e98ea1c46d55e"
+  integrity sha512-RWSbMf6TpGb0qtcVlRTp2wxw9v6n0izo4kCkshWW1hZxqqUpB1FOh2g4uUHk8CnuBcIm34e74VJ7dStCf4u97Q==
+
+scramjet@^4.27.2:
+  version "4.27.2"
+  resolved "https://registry.yarnpkg.com/scramjet/-/scramjet-4.27.2.tgz#e9f3d7c4ffff6b92e2a051eb91f28c64b905a86e"
+  integrity sha512-8jkgxC8rspt4ndhmQpzui79yBFASfPZB48hGUnRxF3/xRuSGXr5ZQPGDyrxWPCaiLMRErqiKIRC5zf3Ygu3P8g==
+  dependencies:
+    papaparse "^5.1.0"
+    rereadable-stream "^1.3.13"
+    scramjet-core "^4.23.5"
 
 semver@^5.5.0:
   version "5.7.1"

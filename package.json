@@ -20,6 +20,7 @@
     "express": "^4.17.1",
     "heroku-logger": "^0.3.3",
     "module-alias": "^2.2.2",
+    "openflights-cached": "^1.1.6",
     "path": "^0.12.7",
     "typescript": "^3.7.2",
     "uuid": "^3.3.3"
