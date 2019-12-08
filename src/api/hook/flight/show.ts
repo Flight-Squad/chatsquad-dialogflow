@@ -16,9 +16,11 @@ export async function onFlightShow(agent) {
 
   if (priceData) {
     const bestTrip = priceData[0];
+    logger.info('Best trip', bestTrip);
+    console.log(bestTrip);
     const {airline, stops, duration, times, price, layover} = bestTrip;
     const ourPrice = calculateTemplatePrice(price);
-    const sepTimes = times.split('-');
+    const sepTimes = times.split('–');
     const takeoff = sepTimes[0].trim();
     const arrival = sepTimes[1].trim();
     agent.add(`It looks like the public price for this trip is around $${price} right now.`);
