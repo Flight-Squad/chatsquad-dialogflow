@@ -35,16 +35,11 @@ export function makeFlightSearchParams(data: any): IFlightSearchParams {
   const params: any = {
     origin: from,
     dest: to,
+    departDate: departure,
+    returnDate: data.return,
+    isRoundTrip: data.return !== undefined,
     numStops: 1, // TODO: make this variable
   };
-
-  const isRoundTrip = departure.startDate !== undefined;
-  if (isRoundTrip) {
-    params.returnDate = new Date(departure.endDate);
-    params.departDate = new Date(departure.startDate);
-  } else {
-    params.departDate = departure;
-  }
 
   return params;
 }
