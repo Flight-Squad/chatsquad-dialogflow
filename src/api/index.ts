@@ -29,7 +29,7 @@ app.post('/sendPrices', (req, res) => {
       queryInput: {
         event: {
           name: 'displayFlight',
-          parameters: data,
+          parameters: data || {},
           languageCode: "en-US",
         },
       },
