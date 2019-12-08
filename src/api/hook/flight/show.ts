@@ -15,7 +15,7 @@ export async function onFlightShow(agent) {
   const priceData = req.data.prices;
 
   if (priceData) {
-    agent.add(`The best price online is ${priceData[0]}`);
+    agent.add(`The best price online is $${priceData[0]}!`);
   } else {
     // TODO error reporting and debugging info
     agent.add("Something went wrong. I'm sorry! A human team member will be in touch shortly.");
