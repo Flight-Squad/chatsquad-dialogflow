@@ -5,6 +5,9 @@ import { Contexts } from "config/dialogflow";
 
 export async function onFlightShow(agent) {
   const baseUri = process.env.PRICESQUAD_API;
+  if (!agent.requestSource) {
+    agent.requestSource = 'PLATFORM_UNSPECIFIED';
+  }
 
   // retrieve data based on session id
   const sessionId = await parseSessionId(agent.session);
@@ -15,7 +18,7 @@ export async function onFlightShow(agent) {
   const priceData = req.data.res;
 
   if (priceData) {
-    logger.info('Req Source', {src: agent.requestSource});
+    logger.info('Req Source', {src: agent.requestSource})
     const bestTrip = priceData[0];
     const {airline, stops, duration, times, price, layover} = bestTrip;
     const ourPrice = calculateTemplatePrice(price);
