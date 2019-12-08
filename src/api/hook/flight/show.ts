@@ -24,8 +24,8 @@ export async function onFlightShow(agent) {
     const takeoff = sepTimes[0].trim();
     const arrival = sepTimes[1].trim();
     agent.add(`It looks like the public price for this trip is around $${price} right now.`);
-    agent.add(`So far, we found a $${ourPrice} ${stops} ${duration} trip leaving at ${takeoff} and landing at ${arrival} local time operated by ${airline}.`);
-    agent.add('Our human agents will follow up soon to further assist you!');
+    // agent.add(`So far, we found a $${ourPrice} ${stops} ${duration} trip leaving at ${takeoff} and landing at ${arrival} local time operated by ${airline}.`);
+    // agent.add('Our human agents will follow up soon to further assist you!');
   } else {
     // TODO error reporting and debugging info
     agent.add("Something went wrong. I'm sorry! A human team member will be in touch shortly.");
