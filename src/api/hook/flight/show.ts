@@ -16,18 +16,18 @@ export async function onFlightShow(agent) {
 
   if (priceData) {
     const bestTrip = priceData[0];
-    logger.info('Best trip', bestTrip);
-    console.log(bestTrip);
     const {airline, stops, duration, times, price, layover} = bestTrip;
     const ourPrice = calculateTemplatePrice(price);
     const sepTimes = times.split('–'); // UTF U+0096
     const takeoff = sepTimes[0].trim();
     const arrival = sepTimes[1].trim();
-    agent.add([
-      `It looks like the public price for this trip is around $${price} right now.`,
-      `So far, we found a $${ourPrice} ${stops} ${duration} trip leaving at ${takeoff} and landing at ${arrival} local time operated by ${airline}.`,
-      'Our human agents will follow up soon to further assist you!',
-    ]);
+    logger.info('Message 1');
+    agent.add(`It looks like the public price for this trip is around $${price} right now.`);
+    logger.info('Message 2');
+    agent.add(`So far, we found a $${ourPrice} ${stops} ${duration} trip leaving at ${takeoff} and landing at ${arrival} local time operated by ${airline}.`);
+    logger.info('Message 3');
+    agent.add('Our human agents will follow up soon to further assist you!');
+    logger.info('Done');
   } else {
     // TODO error reporting and debugging info
     agent.add("Something went wrong. I'm sorry! A human team member will be in touch shortly.");
