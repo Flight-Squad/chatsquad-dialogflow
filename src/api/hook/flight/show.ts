@@ -19,7 +19,7 @@ export async function onFlightShow(agent) {
   if (priceData) {
     // logger.info('Req Source', {src: agent.requestSource})
     const bestTrip = priceData[0];
-    const {airline, stops, duration, times, price, layover} = bestTrip;
+    const { airline, stops, duration, times, price, layover } = bestTrip;
     const ourPrice = calculateTemplatePrice(price);
     const sepTimes = times.split('–'); // UTF U+0096
     const takeoff = sepTimes[0].trim();
@@ -27,11 +27,20 @@ export async function onFlightShow(agent) {
     agent.add([
 
     ]);
-    agent.add(`It looks like the public price for this trip is around $${price} right now.
+    if (agent.parameters['return.original']) {
+      agent.add(`It looks like the public price for this trip is around $${price} right now.
 
-    So far, we found a $${ourPrice} ${stops} ${duration} trip leaving at ${takeoff} and landing at ${arrival} local time operated by ${airline}.
+    So far, we found a $${ourPrice} round-trip itinary. The first trip would be ${stops} with a ${duration} total travel time leaving at ${takeoff} and landing at ${arrival} local time operated by ${airline}.
+
+    Our human agents will follow up soon to send you the return trip details and further assist you!`);
+    } else {
+      agent.add(`It looks like the public price for this trip is around $${price} right now.
+
+    So far, we found a $${ourPrice} trip that is ${stops} with a ${duration} total travel time leaving at ${takeoff} and landing at ${arrival} local time operated by ${airline}.
 
     Our human agents will follow up soon to further assist you!`);
+    }
+
     // agent.add(`It looks like the public price for this trip is around $${price} right now.`);
     // agent.add(`So far, we found a $${ourPrice} ${stops} ${duration} trip leaving at ${takeoff} and landing at ${arrival} local time operated by ${airline}.`);
     // agent.add(`Our human agents will follow up soon to further assist you!`);
