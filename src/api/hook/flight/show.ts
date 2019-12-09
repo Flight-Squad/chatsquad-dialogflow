@@ -5,9 +5,9 @@ import { Contexts } from "config/dialogflow";
 
 export async function onFlightShow(agent) {
   const baseUri = process.env.PRICESQUAD_API;
-  if (!agent.requestSource) {
-    agent.requestSource = 'FACEBOOK';
-  }
+  // if (!agent.requestSource) {
+  //   agent.requestSource = 'FACEBOOK';
+  // }
 
   // retrieve data based on session id
   const sessionId = await parseSessionId(agent.session);
@@ -18,7 +18,7 @@ export async function onFlightShow(agent) {
   const priceData = req.data.res;
 
   if (priceData) {
-    logger.info('Req Source', {src: agent.requestSource})
+    // logger.info('Req Source', {src: agent.requestSource})
     const bestTrip = priceData[0];
     const {airline, stops, duration, times, price, layover} = bestTrip;
     const ourPrice = calculateTemplatePrice(price);
@@ -26,10 +26,13 @@ export async function onFlightShow(agent) {
     const takeoff = sepTimes[0].trim();
     const arrival = sepTimes[1].trim();
     agent.add([
-      `It looks like the public price for this trip is around $${price} right now.`,
-      `So far, we found a $${ourPrice} ${stops} ${duration} trip leaving at ${takeoff} and landing at ${arrival} local time operated by ${airline}.`,
-      `Our human agents will follow up soon to further assist you!`,
+
     ]);
+    agent.add(`It looks like the public price for this trip is around $${price} right now.
+
+    So far, we found a $${ourPrice} ${stops} ${duration} trip leaving at ${takeoff} and landing at ${arrival} local time operated by ${airline}.
+
+    Our human agents will follow up soon to further assist you!`);
     // agent.add(`It looks like the public price for this trip is around $${price} right now.`);
     // agent.add(`So far, we found a $${ourPrice} ${stops} ${duration} trip leaving at ${takeoff} and landing at ${arrival} local time operated by ${airline}.`);
     // agent.add(`Our human agents will follow up soon to further assist you!`);
