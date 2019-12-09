@@ -25,7 +25,7 @@ export async function onFlightShow(agent) {
     const takeoff = sepTimes[0].trim();
     const arrival = sepTimes[1].trim();
 
-    if (agent.parameters['return.original']) {
+    if (agent.context.get('flight').parameters.return) {
       agent.add(`It looks like the public price for this trip is around $${price} right now.
 
     So far, we found a $${ourPrice} round-trip itinary. The first trip would be ${stops} with a ${duration} total travel time leaving at ${takeoff} and landing at ${arrival} local time operated by ${airline}.
