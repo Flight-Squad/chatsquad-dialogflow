@@ -18,6 +18,7 @@ export async function mapFsAirportToIataList(airport: string) : Promise<Array<st
   const baseUri = process.env.PRICESQUAD_API;
   const req = await Axios.get(`${baseUri}/airports/${airport}`);
   const list = req.data.airports;
+  logger.info('Airport Mappings', {airport, list});
   return list;
 }
 
