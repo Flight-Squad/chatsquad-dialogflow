@@ -6,7 +6,7 @@ import { Contexts } from "config/dialogflow";
 export async function onFlightShow(agent) {
   const baseUri = process.env.PRICESQUAD_API;
   if (!agent.requestSource) {
-    agent.requestSource = 'PLATFORM_UNSPECIFIED';
+    agent.requestSource = 'FACEBOOK';
   }
 
   // retrieve data based on session id
