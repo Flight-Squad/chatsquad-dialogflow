@@ -28,7 +28,7 @@ export async function onFlightShow(agent) {
     if (agent.context.get('flight').parameters.return) {
       agent.add(`It looks like the public price for this trip is around $${price} right now.
 
-    So far, we found a $${ourPrice} round-trip itinary. The first trip would be ${stops} with a ${duration} total travel time leaving at ${takeoff} and landing at ${arrival} local time operated by ${airline}.
+    So far, we found a $${ourPrice} round-trip itinerary. The first trip would be ${stops} with a ${duration} total travel time leaving at ${takeoff} and landing at ${arrival} local time operated by ${airline}.
 
     Our human agents will follow up soon to send you the return trip details and further assist you!`);
     } else {

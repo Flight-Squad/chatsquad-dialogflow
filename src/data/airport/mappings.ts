@@ -17,12 +17,11 @@ export async function mapFsAirportToIataList(airport: string) : Promise<Array<st
   // }
   const baseUri = process.env.PRICESQUAD_API;
   const res = await Axios.get(`${baseUri}/airports/${airport}`);
-  console.log(res.data);
   const list = res.data.airports;
-  logger.info('Airport Mappings', {airport, list});
   return list;
 }
 
+// Deprecated
 async function mapFsAirportToCity(airport: string) : Promise<string> {
   let cityName = '';
   switch (airport) {
