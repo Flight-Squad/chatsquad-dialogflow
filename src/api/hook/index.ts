@@ -13,7 +13,8 @@ hookRouter.post('/hook', async (request, response) => {
   // logger.info('Request Params', req.params);
   // logger.info('Request Headers', req.headers);
   const agent = new WebhookClient({request, response});
-  console.log(agent.originalRequest);
+  console.log(agent.originalRequest.payload.body.entry);
+  console.log(request.headers);
   // logger.info('Orig request', request.body.originalDetectIntentRequest);
   // logger.info('Agent Contexts', agent.contexts);
   // console.log(agent.context.get('request-id'));
