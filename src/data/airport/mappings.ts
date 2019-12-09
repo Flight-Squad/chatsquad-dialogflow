@@ -6,8 +6,8 @@ import Axios from "axios";
 export async function mapFsAirportToIataList(airport: string) : Promise<Array<string>> {
   // Use `airport` if it maps directly to an airport
   // Filter out heliports
-  // const entry = iataToAirportMap[airport];
-  // if (entry && entry.name.toLowerCase().includes('airport')) return [airport];
+  const entry = iataToAirportMap[airport];
+  if (entry && entry.name.toLowerCase().includes('airport')) return [airport];
 
   // const cityName = await mapFsAirportToCity(airport);
 
