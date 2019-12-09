@@ -13,10 +13,14 @@ hookRouter.post('/hook', async (request, response) => {
   // logger.info('Request Params', req.params);
   // logger.info('Request Headers', req.headers);
   const agent = new WebhookClient({ request, response });
-  if (agent.originalRequest.payload.body) {
-    console.log(agent.originalRequest.payload.body.entry[0].messaging);
-    console.log(request.headers);
+  function fallback(agent) {
+    agent.add(`I didn't understand`);
+    agent.add(`I'm sorry, can you try again?`);
   }
+  // if (agent.originalRequest.payload.body) {
+  //   console.log(agent.originalRequest.payload.body.entry[0].messaging);
+  //   console.log(request.headers);
+  // }
   // logger.info('Orig request', request.body.originalDetectIntentRequest);
   // logger.info('Agent Contexts', agent.contexts);
   // console.log(agent.context.get('request-id'));
@@ -26,6 +30,7 @@ hookRouter.post('/hook', async (request, response) => {
   let intentMap = new Map();
   intentMap.set('flight.search', async () => await onFlightSearch(agent));
   intentMap.set('flight.show', async () => await onFlightShow(agent));
+  intentMap.set('Default Fallback Intent', fallback);
   // intentMap.set('Default Fallback Intent', fallback);
   // intentMap.set('your intent name here', yourFunctionHandler);
   // intentMap.set('your intent name here', googleAssistantHandler);

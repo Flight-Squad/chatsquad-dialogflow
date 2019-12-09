@@ -1,5 +1,6 @@
 // See https://github.com/dialogflow/dialogflow-fulfillment-nodejs
 // for Dialogflow fulfillment library docs, samples, and to report issues
+// https://us-central1-flightsquad-temp0-jmoyhb.cloudfunctions.net/dialogflowFirebaseFulfillment
 'use strict';
 
 const functions = require('firebase-functions');
