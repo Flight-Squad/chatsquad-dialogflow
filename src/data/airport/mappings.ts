@@ -1,21 +1,24 @@
 import openflightsArray from "openflights-cached/array";
 import iataToAirportMap from "openflights-cached/iata";
 import logger from "config/logger";
+import Axios from "axios";
 
 export async function mapFsAirportToIataList(airport: string) : Promise<Array<string>> {
   // Use `airport` if it maps directly to an airport
   // Filter out heliports
-  const entry = iataToAirportMap[airport];
-  if (entry && entry.name.toLowerCase().includes('airport')) return [airport];
+  // const entry = iataToAirportMap[airport];
+  // if (entry && entry.name.toLowerCase().includes('airport')) return [airport];
 
-  const cityName = await mapFsAirportToCity(airport);
+  // const cityName = await mapFsAirportToCity(airport);
 
-  if (!cityName) {
-    await warnConcierge('No city mapping found', {airport});
-    throw new Error(`No city mapping found for ${airport}`);
-  }
-
-  return mapCityToIataList(cityName);
+  // if (!cityName) {
+  //   await warnConcierge('No city mapping found', {airport});
+  //   throw new Error(`No city mapping found for ${airport}`);
+  // }
+  const baseUri = process.env.PRICESQUAD_API;
+  const req = await Axios.get(`${baseUri}/airports/${airport}`);
+  const list = req.data.airports;
+  return list;
 }
 
 async function mapFsAirportToCity(airport: string) : Promise<string> {

@@ -13,7 +13,6 @@ export async function onFlightShow(agent) {
   const sessionId = await parseSessionId(agent.session);
   const docPath = await agent.context.get(Contexts.ResourceId).parameters.id;
 
-  // TODO Change this when pricesquad GET is updated
   const req = await Axios.get(`${baseUri}/prices/${docPath}`);
   const priceData = req.data.res;
 
