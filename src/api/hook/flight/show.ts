@@ -24,9 +24,7 @@ export async function onFlightShow(agent) {
     const sepTimes = times.split('–'); // UTF U+0096
     const takeoff = sepTimes[0].trim();
     const arrival = sepTimes[1].trim();
-    agent.add([
 
-    ]);
     if (agent.parameters['return.original']) {
       agent.add(`It looks like the public price for this trip is around $${price} right now.
 
