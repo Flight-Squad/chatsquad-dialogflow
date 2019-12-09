@@ -23,6 +23,7 @@ async function sendPriceRequest(sessionPath, params) {
   const baseUri = Services.Pricesquad;
   const flightParams = await makeFlightSearchParams(params);
   const batchFlightParams = await makeBatchFlightParams(flightParams);
+  console.log(batchFlightParams);
   const res = await Axios.post(`${baseUri}/prices/batch`, {
     sessionId: await parseSessionId(sessionPath),
     ...batchFlightParams,
