@@ -16,8 +16,9 @@ export async function mapFsAirportToIataList(airport: string) : Promise<Array<st
   //   throw new Error(`No city mapping found for ${airport}`);
   // }
   const baseUri = process.env.PRICESQUAD_API;
-  const req = await Axios.get(`${baseUri}/airports/${airport}`);
-  const list = req.data.airports;
+  const res = await Axios.get(`${baseUri}/airports/${airport}`);
+  console.log(res.data);
+  const list = res.data.airports;
   logger.info('Airport Mappings', {airport, list});
   return list;
 }
