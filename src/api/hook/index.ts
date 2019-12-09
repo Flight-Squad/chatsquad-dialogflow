@@ -14,7 +14,7 @@ hookRouter.post('/hook', async (request, response) => {
   // logger.info('Request Headers', req.headers);
   const agent = new WebhookClient({ request, response });
   if (agent.originalRequest.payload.body) {
-    console.log(agent.originalRequest.payload.body.entry);
+    console.log(agent.originalRequest.payload.body.entry[0].messaging);
     console.log(request.headers);
   }
   // logger.info('Orig request', request.body.originalDetectIntentRequest);
