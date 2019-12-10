@@ -29,6 +29,10 @@ app.post('/sendPrices', (req, res) => {
       // https://googleapis.dev/nodejs/dialogflow/latest/google.cloud.dialogflow.v2beta1.html#.QueryInput
       // https://cloud.google.com/dialogflow/docs/events-custom
       queryInput: {
+        text: {
+          text: "",
+          languageCode: 'en-US',
+        },
         event: {
           name: 'displayFlight',
           parameters: data || {},
