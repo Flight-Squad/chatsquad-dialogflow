@@ -30,6 +30,11 @@ hookRouter.post('/hook', async (request, response) => {
   let intentMap = new Map();
   intentMap.set('flight.search', async () => await onFlightSearch(agent));
   intentMap.set('flight.show', async () => await onFlightShow(agent));
+  intentMap.set('flight.custom', async () => {
+    await sleep(1000);
+    agent.add('......');
+    agent.setFollowupEvent('sampleCustomEvent');
+  })
   // intentMap.set('flight.show', fallback);
   intentMap.set('Default Fallback Intent', fallback);
   // intentMap.set('Default Fallback Intent', fallback);
@@ -38,5 +43,9 @@ hookRouter.post('/hook', async (request, response) => {
   agent.handleRequest(intentMap);
   // res.sendStatus(201);
 });
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 export default hookRouter;
