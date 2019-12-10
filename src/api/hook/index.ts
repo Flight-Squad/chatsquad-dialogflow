@@ -29,7 +29,7 @@ hookRouter.post('/hook', async (request, response) => {
 
   let intentMap = new Map();
   intentMap.set('flight.search', async () => await onFlightSearch(agent));
-  intentMap.set('flight.show', async () => await onFlightShow(agent));
+  // intentMap.set('flight.show', async () => await onFlightShow(agent));
   intentMap.set('flight.custom', async () => {
     await sleep(1000);
     agent.add('......');

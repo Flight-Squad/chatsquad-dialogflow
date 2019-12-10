@@ -13,9 +13,14 @@ import { makeBatchFlightParams, makeFlightSearchParams } from 'data/models/fligh
  * @param agent type `WebhookClient`
  */
 export async function onFlightSearch(agent) {
-  const docPath = await sendPriceRequest(agent.session, agent.parameters);
+  // const docPath = await sendPriceRequest(agent.session, agent.parameters);
+
+
   // use `id` instead of path to abstract the actual resource that identifies the db entry
-  agent.context.set({ name: Contexts.ResourceId, lifespan: 20, parameters: { id: docPath } });
+  // agent.context.set({ name: Contexts.ResourceId, lifespan: 20, parameters: { id: docPath } });
+
+
+  agent.context.set({ name: Contexts.ResourceId, lifespan: 20, parameters: { id: 'docPath' } });
   agent.add('Aight, we on it.');
   agent.setFollowupEvent('sampleCustomEvent');
 }
