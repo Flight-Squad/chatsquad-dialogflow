@@ -15,6 +15,7 @@ export async function onFlightShow(agent) {
 
   const req = await Axios.get(`${baseUri}/prices/${docPath}`);
   const priceData = req.data.res;
+  logger.info('OnFlightShow', {priceData: priceData === true, roundTrip: agent.context.get('flight').parameters.return === true})
 
   if (priceData) {
     // logger.info('Req Source', {src: agent.requestSource})

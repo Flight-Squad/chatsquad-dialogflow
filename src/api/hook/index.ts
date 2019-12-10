@@ -30,12 +30,6 @@ hookRouter.post('/hook', async (request, response) => {
   let intentMap = new Map();
   intentMap.set('flight.search', async () => await onFlightSearch(agent));
   intentMap.set('flight.show', async () => await onFlightShow(agent));
-  // intentMap.set('zed', () => {
-  //   // await sleep(1000);
-  //   agent.add('asdf sadf');
-  //   agent.setFollowupEvent_('sampleCustomEvent');
-  // })
-  // intentMap.set('flight.show', fallback);
   intentMap.set('Default Fallback Intent', fallback);
   // intentMap.set('Default Fallback Intent', fallback);
   // intentMap.set('your intent name here', yourFunctionHandler);
