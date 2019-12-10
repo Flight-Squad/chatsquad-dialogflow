@@ -19,8 +19,6 @@ export async function onFlightSearch(agent) {
   // use `id` instead of path to abstract the actual resource that identifies the db entry
   agent.context.set({ name: Contexts.ResourceId, lifespan: 20, parameters: { id: docPath } });
 
-
-  agent.context.set({ name: Contexts.ResourceId, lifespan: 20, parameters: { id: 'docPath' } });
   agent.add('Aight, we on it.');
   // agent.setFollowupEvent('sampleCustomEvent');
 }
