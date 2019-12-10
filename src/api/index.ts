@@ -18,9 +18,11 @@ app.get('/', (req, res) => res.send('Hello World!'))
 
 app.post('/sendPrices', (req, res) => {
   const {sessionId, ...data} = req.body;
+  const session = `projects/${projectId}/agent/sessions/${sessionId}`;
+  logger.info('Session', {session});
   sessionClient.detectIntent(
     {
-      session: `projects/${projectId}/agent/sessions/${sessionId}`,
+      session,
       // session: sessionId,
 
       // Trigger a response event
