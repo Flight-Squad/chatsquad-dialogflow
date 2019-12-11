@@ -13,7 +13,7 @@ process.env.DEBUG = 'dialogflow:debug'; // enables lib debugging statements
 
 app.use(express.json())
 
-app.use('/', hookRouter);
+app.use('/hook', hookRouter);
 app.get('/', (req, res) => res.send('Hello World!'))
 
 app.post('/sendPrices', (req, res) => {

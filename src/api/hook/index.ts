@@ -7,7 +7,7 @@ import { onFlightShow } from './flight/show';
 
 const hookRouter = express.Router();
 
-hookRouter.post('/hook', async (request, response) => {
+hookRouter.post('/', async (request, response) => {
   // Include all of these in a canonical line later
   // logger.info('Request Query', req.query);
   // logger.info('Request Params', req.params);
