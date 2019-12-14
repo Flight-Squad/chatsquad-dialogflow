@@ -21,7 +21,9 @@ hookRouter.post('/', async (request, response) => {
   //   console.log(agent.originalRequest.payload.body.entry[0].messaging);
   //   console.log(request.headers);
   // }
-  // logger.info('Orig request', request.body.originalDetectIntentRequest);
+  try {
+    console.log(request.body.originalDetectIntentRequest.payload.body.entry[0]);
+  } catch(err) {}
   // logger.info('Agent Contexts', agent.contexts);
   // console.log(agent.context.get('request-id'));
   // logger.info(`Session ${JSON.stringify(agent.session)}`);
