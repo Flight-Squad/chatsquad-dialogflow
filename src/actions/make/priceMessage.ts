@@ -1,4 +1,7 @@
+import logger from "config/logger";
+
 export async function makePriceMessage(platform: string, isRoundTrip: boolean, trips) {
+  logger.info('Trips', {trips: JSON.stringify(trips, null, 2)});
   if (trips) {
     // logger.info('Req Source', {src: agent.requestSource})
     const bestTrip = trips[0];
