@@ -4,6 +4,7 @@ import { WebhookClient } from 'dialogflow-fulfillment';
 import * as FlightIntent from 'intents/flight';
 import { onFlightSearch } from './flight/search';
 import { onFlightShow } from './flight/show';
+import { Contexts } from 'config/dialogflow';
 
 const hookRouter = express.Router();
 
@@ -21,9 +22,19 @@ hookRouter.post('/', async (request, response) => {
   //   console.log(agent.originalRequest.payload.body.entry[0].messaging);
   //   console.log(request.headers);
   // }
-  try {
-    console.log(JSON.stringify(request.body.originalDetectIntentRequest.payload.body.entry[0], null, 2));
-  } catch(err) {}
+  // try {
+  //   const origReq = request.body.originalDetectIntentRequest;
+  //   if (origReq.payload) {
+  //     agent.context.set({
+  //       name: Contexts.ResourceId, lifespan: 20, parameters: {
+  //         req: origReq,
+  //         source: origReq.payload.source,
+  //         userId: origReq.payload.body.entry[0].messaging[0].sender.id,
+  //       }
+  //     });
+  //   }
+  //   console.log(JSON.stringify(request.body.originalDetectIntentRequest.payload.body.entry[0], null, 2));
+  // } catch (err) { }
   // logger.info('Agent Contexts', agent.contexts);
   // console.log(agent.context.get('request-id'));
   // logger.info(`Session ${JSON.stringify(agent.session)}`);

@@ -13,6 +13,7 @@ import { makeBatchFlightParams, makeFlightSearchParams } from 'data/models/fligh
  * @param agent type `WebhookClient`
  */
 export async function onFlightSearch(agent) {
+  console.log(JSON.stringify(agent.originalRequest.payload.body.entry[0], null, 2));
   const docPath = await sendPriceRequest(agent.session, agent.parameters);
 
 
