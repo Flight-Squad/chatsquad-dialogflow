@@ -13,8 +13,15 @@ import { makeBatchFlightParams, makeFlightSearchParams } from 'data/models/fligh
  * @param agent type `WebhookClient`
  */
 export async function onFlightSearch(agent) {
-  console.log(JSON.stringify(agent.originalRequest.payload.body.entry[0], null, 2));
-  const docPath = await sendPriceRequest(agent.session, agent.parameters);
+  // Note: not sure if agent.originalRequest refers to original express`request` or
+  //    original detect intent request
+  logger.debug('OnFlightSearch Orig Detect Intent Request', {req: JSON.stringify(agent.originalRequest.payload.body.entry[0], null, 2)})
+  const userInfo = {
+    platform: agent.originalRequest.payload.source,
+    id: agent.originalRequest.payload.body.entry[0].messaging[0].sender.id,
+  };
+  logger.info('User Info', userInfo);
+  const docPath = await sendPriceRequest(agent.session, agent.parameters, userInfo);
 
 
   // use `id` instead of path to abstract the actual resource that identifies the db entry
@@ -24,13 +31,14 @@ export async function onFlightSearch(agent) {
   // agent.setFollowupEvent('sampleCustomEvent');
 }
 
-async function sendPriceRequest(sessionPath, params) {
+async function sendPriceRequest(sessionPath, params, user) {
   const baseUri = Services.Pricesquad;
   const flightParams = await makeFlightSearchParams(params);
   const batchFlightParams = await makeBatchFlightParams(flightParams);
   const res = await Axios.post(`${baseUri}/prices/batch`, {
     sessionId: await parseSessionId(sessionPath),
     ...batchFlightParams,
+    user,
   });
   logger.debug('Price Request Response Data', res.data);
   return res.data.id;
