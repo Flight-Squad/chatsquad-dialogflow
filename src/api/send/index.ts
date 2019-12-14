@@ -3,17 +3,11 @@ import { projectId } from "config/gcp";
 import logger from "config/logger";
 import { sendPricesToDialogflow } from "actions/send/prices/toDialogflow";
 import sendMessagesRouter from "./messages";
+import sendPricesRouter from "./prices";
 
 const sendRouter = Router();
 
 sendRouter.use('/messages', sendMessagesRouter);
-
-sendRouter.post('/prices', async (req, res) => {
-  const {sessionId, ...data} = req.body;
-  const session = `projects/${projectId}/agent/sessions/${sessionId}`;
-  logger.info('Session', {session});
-  await sendPricesToDialogflow(session, data);
-  res.sendStatus(201);
-});
+sendRouter.use('/prices', sendPricesRouter);
 
 export default sendRouter;

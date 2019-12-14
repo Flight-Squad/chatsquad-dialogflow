@@ -37,7 +37,7 @@ export function makeFlightSearchParams(data: any): IFlightSearchParams {
     dest: to,
     departDate: departure,
     returnDate: data.return,
-    isRoundTrip: data.return !== undefined,
+    isRoundTrip: Boolean(data.return),
     numStops: 1, // TODO: make this variable
   };
 
