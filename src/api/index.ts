@@ -1,10 +1,8 @@
-import express from 'express'
-import logger from 'config/logger'
-import { WebhookClient } from 'dialogflow-fulfillment';
-import {sessionClient} from 'config/gcp';
-import { projectId } from '../config/gcp';
-import Axios from 'axios';
+import { projectId, sessionClient } from 'config/gcp';
+import logger from 'config/logger';
+import express from 'express';
 import hookRouter from './hook';
+import sendRouter from './send';
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -13,9 +11,12 @@ process.env.DEBUG = 'dialogflow:debug'; // enables lib debugging statements
 
 app.use(express.json())
 
-app.use('/', hookRouter);
-app.get('/', (req, res) => res.send('Hello World!'))
+app.use('/hook', hookRouter);
+app.use('/send', sendRouter);
 
+app.get('/', (req, res) => res.send('OK'));
+
+// deprecated, see /send/prices
 app.post('/sendPrices', (req, res) => {
   const {sessionId, ...data} = req.body;
   const session = `projects/${projectId}/agent/sessions/${sessionId}`;
@@ -42,7 +43,7 @@ app.post('/sendPrices', (req, res) => {
     }
   );
   res.sendStatus(201);
-})
+});
 
-app.listen(port, () => logger.info(`Listening on port ${port}!`))
+app.listen(port, () => logger.info(`Listening on port ${port}!`));
 
