@@ -18,23 +18,6 @@ hookRouter.post('/', async (request, response) => {
     agent.add(`I didn't understand`);
     agent.add(`I'm sorry, can you try again?`);
   }
-  // if (agent.originalRequest.payload.body) {
-  //   console.log(agent.originalRequest.payload.body.entry[0].messaging);
-  //   console.log(request.headers);
-  // }
-  // try {
-  //   const origReq = request.body.originalDetectIntentRequest;
-  //   if (origReq.payload) {
-  //     agent.context.set({
-  //       name: Contexts.ResourceId, lifespan: 20, parameters: {
-  //         req: origReq,
-  //         source: origReq.payload.source,
-  //         userId: origReq.payload.body.entry[0].messaging[0].sender.id,
-  //       }
-  //     });
-  //   }
-  //   console.log(JSON.stringify(request.body.originalDetectIntentRequest.payload.body.entry[0], null, 2));
-  // } catch (err) { }
   // logger.info('Agent Contexts', agent.contexts);
   // console.log(agent.context.get('request-id'));
   // logger.info(`Session ${JSON.stringify(agent.session)}`);
