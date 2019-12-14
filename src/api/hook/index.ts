@@ -22,7 +22,7 @@ hookRouter.post('/', async (request, response) => {
   //   console.log(request.headers);
   // }
   try {
-    console.log(request.body.originalDetectIntentRequest.payload.body.entry[0]);
+    console.log(JSON.stringify(request.body.originalDetectIntentRequest.payload.body.entry[0], null, 2));
   } catch(err) {}
   // logger.info('Agent Contexts', agent.contexts);
   // console.log(agent.context.get('request-id'));
