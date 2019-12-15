@@ -4,10 +4,11 @@ import { WebhookClient } from 'dialogflow-fulfillment';
 import * as FlightIntent from 'intents/flight';
 import { onFlightSearch } from './flight/search';
 import { onFlightShow } from './flight/show';
+import { Contexts } from 'config/dialogflow';
 
 const hookRouter = express.Router();
 
-hookRouter.post('/hook', async (request, response) => {
+hookRouter.post('/', async (request, response) => {
   // Include all of these in a canonical line later
   // logger.info('Request Query', req.query);
   // logger.info('Request Params', req.params);
@@ -17,11 +18,6 @@ hookRouter.post('/hook', async (request, response) => {
     agent.add(`I didn't understand`);
     agent.add(`I'm sorry, can you try again?`);
   }
-  // if (agent.originalRequest.payload.body) {
-  //   console.log(agent.originalRequest.payload.body.entry[0].messaging);
-  //   console.log(request.headers);
-  // }
-  // logger.info('Orig request', request.body.originalDetectIntentRequest);
   // logger.info('Agent Contexts', agent.contexts);
   // console.log(agent.context.get('request-id'));
   // logger.info(`Session ${JSON.stringify(agent.session)}`);

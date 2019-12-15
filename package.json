@@ -19,6 +19,7 @@
     "esm": "^3.2.25",
     "express": "^4.17.1",
     "heroku-logger": "^0.3.3",
+    "messaging-api-messenger": "^0.8.2",
     "module-alias": "^2.2.2",
     "openflights-cached": "^1.1.6",
     "path": "^0.12.7",
