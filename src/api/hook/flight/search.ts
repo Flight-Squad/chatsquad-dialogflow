@@ -15,7 +15,7 @@ import { makeBatchFlightParams, makeFlightSearchParams } from 'data/models/fligh
 export async function onFlightSearch(agent) {
   // Note: not sure if agent.originalRequest refers to original express`request` or
   //    original detect intent request
-  logger.debug('OnFlightSearch Orig Detect Intent Request', {req: JSON.stringify(agent.originalRequest.payload.body.entry[0], null, 2)})
+  console.log(`Message info\n${JSON.stringify(agent.originalRequest.payload.body.entry[0], null, 2)}`)
   const userInfo = {
     platform: agent.originalRequest.payload.source,
     id: agent.originalRequest.payload.body.entry[0].messaging[0].sender.id,
