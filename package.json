@@ -10,6 +10,7 @@
     "start": "tsc && node -r esm bin/index.js"
   },
   "dependencies": {
+    "@flight-squad/admin": "0.0.4",
     "@google-cloud/storage": "^4.1.2",
     "actions-on-google": "^2.12.0",
     "axios": "^0.19.0",
