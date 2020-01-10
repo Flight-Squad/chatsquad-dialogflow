@@ -6,8 +6,8 @@ import {
   FlightSearchQueryFields
 } from "@flight-squad/admin";
 import { mapFsAirportToIataList } from "data/airport/mappings";
-
-// TODO configure database and queue under src/config -> database.ts and queue.ts
+import { ScraperQueue } from "config/queue";
+import { DB } from "config/database";
 
 // No Typescript defs for `dialogflow-fulfillment`.
 // See https://github.com/dialogflow/dialogflow-fulfillment-nodejs/issues/118
@@ -30,14 +30,14 @@ export async function onFlightSearch(agent) {
   };
 
   const customer = await Customer.fromMessaging(
-    getDb(),
+    DB,
     userInfo.platform,
     userInfo.id
   );
 
   await customer.requestSearch(
     await makeSearchQuery(agent.parameters),
-    queue,// TODO replace placeholder
+    ScraperQueue,
     {
       session: await parseSessionId(agent.session),
       platform: userInfo.platform
@@ -47,10 +47,6 @@ export async function onFlightSearch(agent) {
   logger.info("User Info", userInfo);
   agent.add("Aight, we on it.");
 }
-
-/** Placeholder */
-// TODO replace
-function getDb(): Firebase {}
 
 /**
  * Convert dialogflow intent parameters into
