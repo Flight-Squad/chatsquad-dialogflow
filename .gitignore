@@ -182,6 +182,7 @@ $RECYCLE.BIN/
 
 *.env
 
-*ChatSquad-SA.json
+*ChatSquad-SA.json*
+*serviceAccount.json*
 
 bin/
