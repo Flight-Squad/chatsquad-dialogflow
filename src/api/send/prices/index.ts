@@ -13,8 +13,8 @@ const sendPricesRouter = Router();
     trips: Array<any>,
  */
 sendPricesRouter.post('/', async (req, res) => {
-  const {isRoundTrip, trips, userId, platform} = req.body;
-  const message = await makePriceMessage(platform, isRoundTrip, trips);
+  const {isRoundTrip, trips, userId, platform, paymentUrl} = req.body;
+  const message = await makePriceMessage(platform, isRoundTrip, trips, paymentUrl);
   await sendMessage(platform, userId, message);
 
   res.sendStatus(201);

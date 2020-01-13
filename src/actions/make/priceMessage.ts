@@ -1,6 +1,6 @@
 import logger from "config/logger";
 
-export async function makePriceMessage(platform: string, isRoundTrip: boolean, trips) {
+export async function makePriceMessage(platform: string, isRoundTrip: boolean, trips, paymentUrl: string) {
   logger.info('Trips', {trips: JSON.stringify(trips, null, 2)});
   if (trips) {
     // logger.info('Req Source', {src: agent.requestSource})
@@ -24,7 +24,7 @@ Our human agents will follow up soon to send you the return trip details and fur
 
 So far, we found a $${ourPrice} trip that is ${stops} with a ${duration} total travel time leaving at ${takeoff} and landing at ${arrival} local time operated by ${airline}.
 
-Our human agents will follow up soon to further assist you!`;
+You can purchase this trip at ${paymentUrl}`;
     }
     return message;
 

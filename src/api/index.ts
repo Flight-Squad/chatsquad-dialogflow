@@ -3,6 +3,7 @@ import logger from 'config/logger';
 import express from 'express';
 import hookRouter from './hook';
 import sendRouter from './send';
+import iataToAirportMap from "openflights-cached/iata";
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -17,32 +18,14 @@ app.use('/send', sendRouter);
 app.get('/', (req, res) => res.send('OK'));
 
 // deprecated, see /send/prices
-app.post('/sendPrices', (req, res) => {
-  const {sessionId, ...data} = req.body;
-  const session = `projects/${projectId}/agent/sessions/${sessionId}`;
-  logger.info('Session', {session});
-  sessionClient.detectIntent(
-    {
-      session,
-      // session: sessionId,
+app.get('/airport', (req, res) => {
+  const { iata } = req.body;
+  const airport = iataToAirportMap[iata];
+  if (airport && airport.name.toLowerCase().includes('airport')) {
+    res.status(200).send(JSON.stringify(airport));
+  }
 
-      // Trigger a response event
-      // https://googleapis.dev/nodejs/dialogflow/latest/google.cloud.dialogflow.v2beta1.html#.QueryInput
-      // https://cloud.google.com/dialogflow/docs/events-custom
-      queryInput: {
-        text: {
-          text: "",
-          languageCode: 'en-US',
-        },
-        event: {
-          name: 'displayFlight',
-          parameters: data || {},
-          languageCode: "en-US",
-        },
-      },
-    }
-  );
-  res.sendStatus(201);
+  res.sendStatus(404);
 });
 
 app.listen(port, () => logger.info(`Listening on port ${port}!`));
