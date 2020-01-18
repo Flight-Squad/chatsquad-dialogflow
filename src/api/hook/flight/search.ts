@@ -2,12 +2,15 @@ import { parseSessionId } from "actions/parse/session/id";
 import logger from "config/logger";
 import {
   Customer,
-  Firebase,
-  FlightSearchQueryFields
+  FlightSearchQueryFields,
+  IataMapper
 } from "@flight-squad/admin";
 import { mapFsAirportToIataList } from "data/airport/mappings";
 import { ScraperQueue } from "config/queue";
-import { DB } from "config/database";
+import { DB, LocationIataMap } from "config/database";
+import { createFlightSquadDebugger } from "config/logger";
+
+const debug = createFlightSquadDebugger('search')
 
 // No Typescript defs for `dialogflow-fulfillment`.
 // See https://github.com/dialogflow/dialogflow-fulfillment-nodejs/issues/118
@@ -35,8 +38,21 @@ export async function onFlightSearch(agent) {
     userInfo.id
   );
 
+  logger.info('Customer retrieved');
+
+  if (!LocationIataMap.loaded()) {
+    await LocationIataMap.load();
+  }
+
+  debug('Agent Parameters %O', agent.parameters);
+
+  const query = await makeSearchQuery(agent.parameters, LocationIataMap);
+  debug('Query %O', {...query, numTrips: query.origins.length * query.dests.length * query.departDates.length * (query.returnDates.length || 1)})
+
+  logger.info('Query Created')
+
   await customer.requestSearch(
-    await makeSearchQuery(agent.parameters),
+    query,
     ScraperQueue,
     {
       session: await parseSessionId(agent.session),
@@ -53,14 +69,14 @@ export async function onFlightSearch(agent) {
  * Flight Squad search query
  * @param params Parameters from Dialogflow agent
  */
-async function makeSearchQuery(params): Promise<FlightSearchQueryFields> {
+async function makeSearchQuery(params, iataMapper: IataMapper): Promise<FlightSearchQueryFields> {
   const isRoundTrip = Boolean(params.return);
   return {
-    origins: await mapFsAirportToIataList(params.from),
-    dests: await mapFsAirportToIataList(params.to),
+    origins: await mapFsAirportToIataList(params.from, iataMapper),
+    dests: await mapFsAirportToIataList(params.to, iataMapper),
     departDates: [params.departure],
     returnDates: isRoundTrip ? [params.return] : [],
     isRoundTrip,
-    stops: 1
+    stops: 1,
   };
 }

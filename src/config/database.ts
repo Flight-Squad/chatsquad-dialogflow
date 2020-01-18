@@ -1,4 +1,4 @@
-import { Database } from "@flight-squad/admin";
+import { Database, AirportLocMap } from "@flight-squad/admin";
 import path from "path";
 
 Database.init({
@@ -9,4 +9,8 @@ Database.init({
 
 export const DB = Database.firebase;
 
-
+export const LocationIataMap = new AirportLocMap(
+  process.env.AIRPORT_LOC_DOC,
+  process.env.AIRPORT_LOC_SHEET_NAME,
+  DB
+);
