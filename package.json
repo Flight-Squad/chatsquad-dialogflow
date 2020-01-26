@@ -11,7 +11,7 @@
     "start:dev": "cross-env DEBUG=* npm run start"
   },
   "dependencies": {
-    "@flight-squad/admin": "0.0.25",
+    "@flight-squad/admin": "0.0.38",
     "@google-cloud/storage": "^4.1.2",
     "@types/debug": "^4.1.5",
     "actions-on-google": "^2.12.0",
@@ -20,6 +20,7 @@
     "dialogflow": "^0.14.1",
     "dialogflow-fulfillment": "^0.6.1",
     "dotenv": "^8.2.0",
+    "envkey": "^1.2.7",
     "esm": "^3.2.25",
     "express": "^4.17.1",
     "heroku-logger": "^0.3.3",

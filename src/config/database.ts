@@ -1,6 +1,8 @@
 import { Database, AirportLocMap } from "@flight-squad/admin";
 import path from "path";
 
+console.log(process.env.NODE_ENV);
+
 Database.init({
   serviceAccount: process.env.FIRESTORE_CONFIG,
   firebaseUrl: process.env.FIREBASE_URL,
