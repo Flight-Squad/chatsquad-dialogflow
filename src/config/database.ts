@@ -12,7 +12,7 @@ Database.init({
 export const DB = Database.firebase;
 
 export const LocationIataMap = new AirportLocMap(
-  process.env.AIRPORT_LOC_DOC,
+  process.env.GSHEETS_DOC,
   process.env.AIRPORT_LOC_SHEET_NAME,
   DB
 );
