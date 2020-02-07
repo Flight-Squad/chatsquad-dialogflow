@@ -68,14 +68,22 @@ export async function onFlightSearch(agent) {
  * Convert dialogflow intent parameters into
  * Flight Squad search query
  * @param params Parameters from Dialogflow agent
+ * 
+ * To Debug this function, run/deploy with env DEBUG=*
+ * and wait for flightsquad:search Agent Parameters debug message
+ * 
+ * This unit is currently developed and controlled by business unit. I'm sorry for any sudden, breaking
+ * changes.
  */
 async function makeSearchQuery(params, iataMapper: IataMapper): Promise<FlightSearchQueryFields> {
-  const isRoundTrip = Boolean(params.return);
+  const baseReturnDate = params.departure.endDate;
+  const isRoundTrip = Boolean(baseReturnDate);
+  const baseDepartDate = isRoundTrip ? params.departure.startDate : params.departure;
   return {
     origins: await mapFsAirportToIataList(params.from, iataMapper),
     dests: await mapFsAirportToIataList(params.to, iataMapper),
-    departDates: [params.departure],
-    returnDates: isRoundTrip ? [params.return] : [],
+    departDates: [baseDepartDate],
+    returnDates: isRoundTrip ? [baseReturnDate] : [],
     isRoundTrip,
     stops: 1,
   };
