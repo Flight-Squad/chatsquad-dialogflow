@@ -2,6 +2,7 @@ import { Router } from "express";
 import { makePriceMessage } from "actions/make/priceMessage";
 import { sendMessage } from "actions/send/messages";
 import { PaymentMessageReq } from "@flight-squad/common";
+import logger from "config/logger";
 
 const sendMessagesRouter = Router();
 
@@ -27,6 +28,7 @@ sendMessagesRouter.post("/payment", async (req, res) => {
     reqData.trip,
     reqData.payment.url
   );
+  logger.info(message);
   await sendMessage(reqData.platform, reqData.id, message);
 
   res.sendStatus(201);

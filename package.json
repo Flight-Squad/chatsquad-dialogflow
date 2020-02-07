@@ -8,10 +8,10 @@
   "private": true,
   "scripts": {
     "start": "tsc && node -r esm bin/index.js",
-    "start:dev": "cross-env DEBUG=* npm run start"
+    "start:dev": "cross-env DEBUG=* ts-node-dev --respawn -r tsconfig-paths/register src/index.ts"
   },
   "dependencies": {
-    "@flight-squad/admin": "0.0.43",
+    "@flight-squad/admin": "0.0.48",
     "@google-cloud/storage": "^4.1.2",
     "@types/debug": "^4.1.5",
     "actions-on-google": "^2.12.0",
@@ -40,6 +40,8 @@
     "data": "bin/data"
   },
   "devDependencies": {
-    "cross-env": "^6.0.3"
+    "cross-env": "^6.0.3",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "tsconfig-paths": "^3.9.0"
   }
 }
