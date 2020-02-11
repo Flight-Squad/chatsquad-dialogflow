@@ -1,4 +1,3 @@
-import { projectId, sessionClient } from 'config/gcp';
 import logger from 'config/logger';
 import express from 'express';
 import hookRouter from './hook';

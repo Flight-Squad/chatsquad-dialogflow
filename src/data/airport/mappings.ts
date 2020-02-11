@@ -1,35 +1,18 @@
 import openflightsArray from "openflights-cached/array";
 import iataToAirportMap from "openflights-cached/iata";
 import logger from "config/logger";
-import Axios from "axios";
+import { IataMapper } from "@flight-squad/admin";
 
-export async function mapFsAirportToIataList(airport: string) : Promise<Array<string>> {
+export async function mapFsAirportToIataList(
+  airport: string,
+  iataMapper: IataMapper
+): Promise<Array<string>> {
   // Use `airport` if it maps directly to an airport
   // Filter out heliports
   const entry = iataToAirportMap[airport];
-  if (entry && entry.name.toLowerCase().includes('airport')) return [airport];
+  if (entry && entry.name.toLowerCase().includes("airport")) return [airport];
 
-  // const cityName = await mapFsAirportToCity(airport);
-
-  // if (!cityName) {
-  //   await warnConcierge('No city mapping found', {airport});
-  //   throw new Error(`No city mapping found for ${airport}`);
-  // }
-  const baseUri = process.env.PRICESQUAD_API;
-  const res = await Axios.get(`${baseUri}/airports/${airport}`);
-  const list = res.data.airports;
-  return list;
-}
-
-// Deprecated
-async function mapFsAirportToCity(airport: string) : Promise<string> {
-  let cityName = '';
-  switch (airport) {
-    case 'NYC': cityName = 'New York'; break;
-    case 'LA': cityName = 'Los Angeles'; break;
-    default: logger.error('No city mapping configured', { airport }); // throw error and alert concierge
-  }
-  return cityName;
+  return await iataMapper.iatas(airport);
 }
 
 async function warnConcierge(message: string, options: any) {
@@ -37,8 +20,11 @@ async function warnConcierge(message: string, options: any) {
   logger.error(message, options);
 }
 
-async function mapCityToIataList(cityName: string) : Promise<Array<string>> {
-  const airportsInNewYork = openflightsArray.filter(({ city, name }) => city.includes(cityName) && name.toLowerCase().includes('airport'));
+async function mapCityToIataList(cityName: string): Promise<Array<string>> {
+  const airportsInNewYork = openflightsArray.filter(
+    ({ city, name }) =>
+      city.includes(cityName) && name.toLowerCase().includes("airport")
+  );
   const iataAirports = airportsInNewYork.filter(({ iata }) => iata);
   const origins = iataAirports.map(entry => entry.iata);
   return origins;
