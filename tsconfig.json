@@ -8,14 +8,8 @@
     "esModuleInterop": true,
     "baseUrl": "./src",
     "paths": {
-      "*": [
-        "*",
-        "bin/*"
-      ]
-    },
+      "*": ["*", "src/*", "bin/*"]
+    }
   },
-  "exclude": [
-    "node_modules",
-    "docs"
-  ]
+  "exclude": ["node_modules", "docs"]
 }

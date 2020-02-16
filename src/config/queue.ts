@@ -1,3 +1,7 @@
-import { SqsQueue, TripScraperQuery } from "@flight-squad/admin";
+import { TripScraperQuery, BatchQueue } from "@flight-squad/admin";
 
-export const ScraperQueue = new SqsQueue<TripScraperQuery>(process.env.AWS_QUEUE_REGION, process.env.AWS_QUEUE)
+console.log("Batch Queue config", process.env.BATCH_QUEUE_CONFIG);
+
+export const ScraperQueue = new BatchQueue<TripScraperQuery>(
+  JSON.parse(process.env.BATCH_QUEUE_CONFIG)
+);
