@@ -13,7 +13,7 @@
     "start:debug:prod": "cross-env NODE_ENV=production npm run start:dev"
   },
   "dependencies": {
-    "@flight-squad/admin": "0.1.4",
+    "@flight-squad/admin": "0.1.5",
     "@google-cloud/storage": "^4.1.2",
     "@types/debug": "^4.1.5",
     "actions-on-google": "^2.12.0",
