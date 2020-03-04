@@ -13,6 +13,9 @@ export const DB = Database.firebase;
 
 console.log(DB);
 
+console.log("gsheets doc", process.env.GSHEETS_DOC);
+console.log("airport-loc sheet", process.env.AIRPORT_LOC_SHEET_NAME);
+
 export const LocationIataMap = new AirportLocMap(
   process.env.GSHEETS_DOC,
   process.env.AIRPORT_LOC_SHEET_NAME,
