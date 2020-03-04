@@ -31,6 +31,7 @@
     "openflights-cached": "^1.1.6",
     "path": "^0.12.7",
     "ts-node": "^8.6.2",
+    "tsconfig-paths": "^3.9.0",
     "typescript": "^3.7.2",
     "uuid": "^3.3.3"
   },
@@ -44,7 +45,6 @@
   },
   "devDependencies": {
     "cross-env": "^6.0.3",
-    "ts-node-dev": "^1.0.0-pre.44",
-    "tsconfig-paths": "^3.9.0"
+    "ts-node-dev": "^1.0.0-pre.44"
   }
 }
