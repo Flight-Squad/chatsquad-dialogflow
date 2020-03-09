@@ -7,6 +7,6 @@ const makeDuffelRequestHeaders = accessToken => ({
   Authorization: `Bearer ${accessToken}`
 });
 
-const DuffelAxios = Axios.create({
+export const DuffelAxios = Axios.create({
   headers: makeDuffelRequestHeaders(process.env.DUFFEL_TOKEN)
 });
