@@ -1,0 +1,12 @@
+import Axios from "axios";
+
+const makeDuffelRequestHeaders = accessToken => ({
+  "Content-Type": "application/json",
+  "Accept-Encoding": "gzip",
+  "Duffel-Version": "beta",
+  Authorization: `Bearer ${accessToken}`
+});
+
+const DuffelAxios = Axios.create({
+  headers: makeDuffelRequestHeaders(process.env.DUFFEL_TOKEN)
+});
